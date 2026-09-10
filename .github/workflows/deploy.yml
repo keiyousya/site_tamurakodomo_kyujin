@@ -51,4 +51,4 @@ jobs:
           service_account: ${{ env.GCP_SA_EMAIL }}
 
       - name: Deploy to Firebase Hosting & Functions
-        run: npx firebase deploy --only hosting:tamurakodomo-kyujin,functions --project ${{ env.GCP_PROJECT_ID }}
+        run: npx firebase deploy --only hosting:tamurakodomo-kyujin,functions:sendApplyEmail --project ${{ env.GCP_PROJECT_ID }}
