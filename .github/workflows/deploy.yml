@@ -1,41 +1,54 @@
-name: Deploy to GitHub Pages
+name: Deploy to Firebase Hosting
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+env:
+  GCP_PROJECT_ID: keiyousya-sites-prod
+  GCP_WIF_PROVIDER: projects/947584970744/locations/global/workloadIdentityPools/github-actions/providers/github
+  GCP_SA_EMAIL: firebase-deploy@keiyousya-sites-prod.iam.gserviceaccount.com
 
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: deploy
+  cancel-in-progress: false
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
+    permissions:
+      contents: 'read'
+      id-token: 'write'
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Astro site
+        run: pnpm run build
+
+      - name: Install function dependencies
+        run: cd functions && npm ci && npm run build
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.GCP_WIF_PROVIDER }}
+          service_account: ${{ env.GCP_SA_EMAIL }}
+
+      - name: Deploy to Firebase Hosting & Functions
+        run: npx firebase deploy --only hosting:tamurakodomo-kyujin,functions --project ${{ env.GCP_PROJECT_ID }}

@@ -1,0 +1,120 @@
+---
+---
+
+<form id="apply-form" class="mx-auto max-w-lg space-y-6">
+  <!-- ハニーポット -->
+  <div class="hidden" aria-hidden="true">
+    <input type="text" name="_hp" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div>
+    <label for="name" class="mb-1 block text-sm font-bold text-ink-900">お名前 <span class="text-warm-500">*</span></label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      required
+      maxlength="100"
+      class="w-full rounded-lg border border-sky-200 bg-white px-4 py-3 text-sm text-ink-900 outline-none transition-colors focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+      placeholder="田村 花子"
+    />
+  </div>
+
+  <div>
+    <label for="email" class="mb-1 block text-sm font-bold text-ink-900">メールアドレス <span class="text-warm-500">*</span></label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      required
+      maxlength="254"
+      class="w-full rounded-lg border border-sky-200 bg-white px-4 py-3 text-sm text-ink-900 outline-none transition-colors focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+      placeholder="example@email.com"
+    />
+  </div>
+
+  <div>
+    <label for="phone" class="mb-1 block text-sm font-bold text-ink-900">電話番号</label>
+    <input
+      type="tel"
+      id="phone"
+      name="phone"
+      maxlength="20"
+      class="w-full rounded-lg border border-sky-200 bg-white px-4 py-3 text-sm text-ink-900 outline-none transition-colors focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+      placeholder="090-1234-5678"
+    />
+  </div>
+
+  <div>
+    <label for="message" class="mb-1 block text-sm font-bold text-ink-900">メッセージ <span class="text-warm-500">*</span></label>
+    <textarea
+      id="message"
+      name="message"
+      required
+      maxlength="5000"
+      rows="5"
+      class="w-full rounded-lg border border-sky-200 bg-white px-4 py-3 text-sm text-ink-900 outline-none transition-colors focus:border-sky-400 focus:ring-2 focus:ring-sky-200 resize-y"
+      placeholder="ご質問・ご希望の勤務形態・見学希望など、お気軽にご記入ください"
+    ></textarea>
+  </div>
+
+  <button
+    type="submit"
+    class="w-full rounded-full bg-warm-500 py-4 text-base font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-warm-600 hover:shadow-lg disabled:opacity-50 disabled:hover:translate-y-0"
+  >
+    <span id="btn-text">送信する</span>
+    <span id="btn-loading" class="hidden">送信中...</span>
+  </button>
+
+  <div id="form-success" class="hidden rounded-lg bg-leaf-100 p-4 text-center text-sm font-bold text-leaf-500">
+    ✓ 送信が完了しました。確認次第、ご連絡いたします。
+  </div>
+  <div id="form-error" class="hidden rounded-lg bg-red-50 p-4 text-center text-sm font-bold text-red-600">
+  </div>
+</form>
+
+<script>
+  const form = document.getElementById('apply-form') as HTMLFormElement;
+  const btnText = document.getElementById('btn-text')!;
+  const btnLoading = document.getElementById('btn-loading')!;
+  const successMsg = document.getElementById('form-success')!;
+  const errorMsg = document.getElementById('form-error')!;
+  const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    successMsg.classList.add('hidden');
+    errorMsg.classList.add('hidden');
+
+    btnText.classList.add('hidden');
+    btnLoading.classList.remove('hidden');
+    submitBtn.disabled = true;
+
+    const data = Object.fromEntries(new FormData(form));
+
+    try {
+      const res = await fetch('/api/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (res.ok && result.success) {
+        successMsg.classList.remove('hidden');
+        form.reset();
+      } else {
+        errorMsg.textContent = result.error || '送信に失敗しました。';
+        errorMsg.classList.remove('hidden');
+      }
+    } catch {
+      errorMsg.textContent = '通信エラーが発生しました。しばらくしてからお試しください。';
+      errorMsg.classList.remove('hidden');
+    } finally {
+      btnText.classList.remove('hidden');
+      btnLoading.classList.add('hidden');
+      submitBtn.disabled = false;
+    }
+  });
+</script>

@@ -1,6 +1,7 @@
 node_modules/
 dist/
 .astro/
+functions/lib/
 google-ads.yaml
 *.env
 .DS_Store

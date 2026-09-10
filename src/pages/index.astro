@@ -5,6 +5,7 @@ import Footer from '@/components/Footer.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
 import FeatureCard from '@/components/FeatureCard.astro';
 import RequirementsTable from '@/components/RequirementsTable.astro';
+import ApplyForm from '@/components/ApplyForm.astro';
 
 const requirements = [
   { label: '募集職種', value: '看護師（正看護師・准看護師）' },
@@ -108,38 +109,32 @@ const requirements = [
     </div>
   </section>
 
-  <!-- Apply -->
+  <!-- Apply Form -->
   <section class="py-20 md:py-28 bg-cloud-50" id="apply">
     <div class="mx-auto max-w-3xl px-5">
-      <SectionHeading label="contact" title="応募・お問い合わせ" />
+      <SectionHeading label="apply" title="応募フォーム" />
       <p class="reveal mb-10 text-center text-ink-700">
-        ご応募・ご質問は、お電話またはメールよりお気軽にご連絡ください。<br />見学のみのご希望も大歓迎です。
+        以下のフォームからご応募ください。見学のみのご希望もお気軽にどうぞ。
       </p>
-      <div class="grid gap-6 sm:grid-cols-2">
-        <!-- 電話 -->
-        <div class="reveal rounded-2xl bg-white p-8 text-center shadow-sm">
-          <div class="mb-3 text-3xl">📞</div>
-          <h3 class="mb-3 text-base font-bold">お電話でのお問い合わせ</h3>
-          <a
-            href="tel:027-212-5670"
-            class="mb-3 inline-block text-2xl font-bold text-sky-600 transition-colors hover:text-sky-700"
-          >
-            027-212-5670
-          </a>
-          <p class="text-xs text-ink-500">受付時間：診療時間内<br />「求人を見た」とお伝えください</p>
-        </div>
-        <!-- メール -->
-        <div class="reveal rounded-2xl bg-white p-8 text-center shadow-sm" style="transition-delay:100ms">
-          <div class="mb-3 text-3xl">✉️</div>
-          <h3 class="mb-3 text-base font-bold">メールでのお問い合わせ</h3>
-          <a
-            href="mailto:tamura.kodomo.clinic@gmail.com"
-            class="mb-3 inline-block text-base font-bold text-sky-600 break-all transition-colors hover:text-sky-700"
-          >
-            tamura.kodomo.clinic@gmail.com
-          </a>
-          <p class="text-xs text-ink-500">件名に「看護師応募」とご記入の上、<br />履歴書をお送りください</p>
-        </div>
+      <div class="reveal rounded-2xl bg-white p-8 shadow-sm">
+        <ApplyForm />
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="py-20 md:py-28 bg-sky-50" id="contact">
+    <div class="mx-auto max-w-3xl px-5">
+      <SectionHeading label="contact" title="お電話でのお問い合わせ" />
+      <div class="reveal mx-auto max-w-sm rounded-2xl bg-white p-8 text-center shadow-sm">
+        <div class="mb-3 text-3xl">📞</div>
+        <a
+          href="tel:027-212-5670"
+          class="mb-3 inline-block text-2xl font-bold text-sky-600 transition-colors hover:text-sky-700"
+        >
+          027-212-5670
+        </a>
+        <p class="text-xs text-ink-500">受付時間：診療時間内<br />「求人を見た」とお伝えください</p>
       </div>
     </div>
   </section>

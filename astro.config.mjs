@@ -3,8 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://keiyousya.github.io',
-  base: '/site_tamurakodomo_kyujin',
+  site: 'https://tamurakodomo-kyujin.web.app',
   trailingSlash: 'never',
   integrations: [sitemap()],
   vite: {

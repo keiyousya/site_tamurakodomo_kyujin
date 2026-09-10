@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@formspree/cli": "^0.9.6",
     "prettier": "^3.9.6",
     "sharp": "^0.35.3",
     "typescript": "^7.0.2"
