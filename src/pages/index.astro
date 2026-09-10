@@ -1,0 +1,148 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import FeatureCard from '@/components/FeatureCard.astro';
+import RequirementsTable from '@/components/RequirementsTable.astro';
+
+const requirements = [
+  { label: '募集職種', value: '看護師（正看護師・准看護師）' },
+  { label: '雇用形態', value: '常勤（正社員）／パート・アルバイト' },
+  {
+    label: '仕事内容',
+    value: `<ul class="list-disc pl-5 space-y-1">
+      <li>診察の補助（問診・検査・処置のサポート）</li>
+      <li>予防接種・健診の対応</li>
+      <li>保護者への説明・指導</li>
+      <li>院内の感染対策・環境整備</li>
+    </ul>`,
+  },
+  {
+    label: '応募資格',
+    value: '看護師免許をお持ちの方（正看護師・准看護師）<br>※小児科経験不問・ブランクのある方も歓迎',
+  },
+  {
+    label: '勤務時間',
+    value: '【午前】8:30〜12:30<br>【午後】14:30〜18:00<br>※パートの場合は応相談',
+  },
+  {
+    label: '休日・休暇',
+    value: '木曜・日曜・祝日休み<br>夏季休暇・年末年始休暇あり',
+  },
+  {
+    label: '給与',
+    value:
+      '【常勤】月給 応相談（経験・能力を考慮）<br>【パート】時給 応相談<br>※昇給あり・賞与あり（実績による）',
+  },
+  {
+    label: '待遇・福利厚生',
+    value: `<ul class="list-disc pl-5 space-y-1">
+      <li>社会保険完備（常勤の場合）</li>
+      <li>交通費支給</li>
+      <li>駐車場完備（車通勤OK）</li>
+      <li>制服貸与</li>
+      <li>有給休暇あり</li>
+    </ul>`,
+  },
+  {
+    label: '勤務地',
+    value: 'たむらこどもクリニック<br>〒371-0048 群馬県前橋市田口町',
+  },
+];
+---
+
+<Layout title="看護師募集｜たむらこどもクリニック（群馬県前橋市）">
+  <Header />
+
+  <!-- Hero -->
+  <section
+    data-hero
+    class="relative flex min-h-[85vh] items-center justify-center bg-gradient-to-br from-sky-100 via-sky-50 to-leaf-50 pt-16"
+  >
+    <div class="mx-auto max-w-5xl px-5 text-center">
+      <p class="reveal mb-5 inline-block rounded-full bg-warm-500 px-6 py-1.5 text-sm font-bold text-white">
+        看護師 募集中
+      </p>
+      <h2 class="reveal mb-6 text-3xl font-bold leading-snug text-sky-800 md:text-5xl font-display" style="transition-delay:100ms">
+        子どもたちの笑顔に<br />囲まれて働きませんか？
+      </h2>
+      <p class="reveal mx-auto mb-10 max-w-lg text-base text-ink-700" style="transition-delay:200ms">
+        たむらこどもクリニックでは、一緒に子どもたちの健康を支えてくれる看護師スタッフを募集しています。
+      </p>
+      <a
+        href="#requirements"
+        class="reveal inline-block rounded-full bg-warm-500 px-10 py-4 text-base font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-warm-600 hover:shadow-xl"
+        style="transition-delay:300ms"
+      >
+        募集要項を見る
+      </a>
+    </div>
+
+    <!-- 装飾: 波 -->
+    <div class="absolute bottom-0 left-0 right-0">
+      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="block w-full">
+        <path d="M0 40C360 80 720 0 1080 40C1260 60 1380 50 1440 45V80H0V40Z" fill="oklch(0.995 0.003 240)" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-20 md:py-28 bg-cloud-50" id="features">
+    <div class="mx-auto max-w-5xl px-5">
+      <SectionHeading label="why us" title="当院で働く魅力" />
+      <div class="grid gap-6 sm:grid-cols-2">
+        <FeatureCard icon="🏥" title="アットホームな職場" text="少人数のスタッフで協力し合いながら働く、温かい雰囲気のクリニックです。" delay={0} />
+        <FeatureCard icon="⏰" title="働きやすい勤務体制" text="日勤のみで夜勤なし。プライベートとの両立がしやすい環境です。" delay={100} />
+        <FeatureCard icon="👶" title="小児科の経験が積める" text="小児科未経験でも丁寧に指導します。子ども好きな方を歓迎します。" delay={200} />
+        <FeatureCard icon="🚗" title="通勤しやすい立地" text="前橋市内でアクセス良好。駐車場完備で車通勤も可能です。" delay={300} />
+      </div>
+    </div>
+  </section>
+
+  <!-- Requirements -->
+  <section class="py-20 md:py-28 bg-sky-50" id="requirements">
+    <div class="mx-auto max-w-3xl px-5">
+      <SectionHeading label="requirements" title="募集要項" />
+      <RequirementsTable rows={requirements} />
+    </div>
+  </section>
+
+  <!-- Apply -->
+  <section class="py-20 md:py-28 bg-cloud-50" id="apply">
+    <div class="mx-auto max-w-3xl px-5">
+      <SectionHeading label="contact" title="応募・お問い合わせ" />
+      <p class="reveal mb-10 text-center text-ink-700">
+        ご応募・ご質問は、お電話またはメールよりお気軽にご連絡ください。<br />見学のみのご希望も大歓迎です。
+      </p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <!-- 電話 -->
+        <div class="reveal rounded-2xl bg-white p-8 text-center shadow-sm">
+          <div class="mb-3 text-3xl">📞</div>
+          <h3 class="mb-3 text-base font-bold">お電話でのお問い合わせ</h3>
+          <a
+            href="tel:027-212-5670"
+            class="mb-3 inline-block text-2xl font-bold text-sky-600 transition-colors hover:text-sky-700"
+          >
+            027-212-5670
+          </a>
+          <p class="text-xs text-ink-500">受付時間：診療時間内<br />「求人を見た」とお伝えください</p>
+        </div>
+        <!-- メール -->
+        <div class="reveal rounded-2xl bg-white p-8 text-center shadow-sm" style="transition-delay:100ms">
+          <div class="mb-3 text-3xl">✉️</div>
+          <h3 class="mb-3 text-base font-bold">メールでのお問い合わせ</h3>
+          <a
+            href="mailto:tamura.kodomo.clinic@gmail.com"
+            class="mb-3 inline-block text-base font-bold text-sky-600 break-all transition-colors hover:text-sky-700"
+          >
+            tamura.kodomo.clinic@gmail.com
+          </a>
+          <p class="text-xs text-ink-500">件名に「看護師応募」とご記入の上、<br />履歴書をお送りください</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

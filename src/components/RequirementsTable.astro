@@ -1,0 +1,23 @@
+---
+interface Row {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  rows: Row[];
+}
+
+const { rows } = Astro.props;
+---
+
+<div class="reveal overflow-hidden rounded-2xl bg-white shadow-md">
+  {rows.map((row, i) => (
+    <div class:list={['flex flex-col md:flex-row', { 'border-t border-sky-100': i > 0 }]}>
+      <div class="bg-sky-600 px-5 py-3 text-sm font-bold text-white md:w-44 md:shrink-0 md:flex md:items-start">
+        {row.label}
+      </div>
+      <div class="flex-1 px-5 py-3 text-sm text-ink-900 leading-relaxed" set:html={row.value} />
+    </div>
+  ))}
+</div>

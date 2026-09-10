@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.astro/
+google-ads.yaml
+*.env
+.DS_Store

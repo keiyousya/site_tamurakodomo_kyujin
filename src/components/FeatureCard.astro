@@ -1,0 +1,19 @@
+---
+interface Props {
+  icon: string;
+  title: string;
+  text: string;
+  delay?: number;
+}
+
+const { icon, title, text, delay = 0 } = Astro.props;
+---
+
+<div
+  class="reveal rounded-2xl border border-sky-200/60 bg-white p-8 text-center transition-shadow hover:shadow-lg"
+  style={delay ? `transition-delay: ${delay}ms` : undefined}
+>
+  <div class="mb-3 text-4xl">{icon}</div>
+  <h3 class="mb-2 text-lg font-bold text-sky-600 font-display">{title}</h3>
+  <p class="text-sm text-ink-700 leading-relaxed">{text}</p>
+</div>

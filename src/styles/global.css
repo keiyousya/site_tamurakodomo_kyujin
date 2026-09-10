@@ -1,0 +1,113 @@
+@import 'tailwindcss';
+
+/* ============================================
+   KODOMO CLINIC THEME — DESIGN TOKENS
+   Sky blue × White × Warm orange (CTA)
+   ============================================ */
+@theme {
+  /* --- Sky: やさしい水色 — 小児科の清潔感と安心感 --- */
+  --color-sky-50: oklch(0.97 0.02 230);
+  --color-sky-100: oklch(0.94 0.04 230);
+  --color-sky-200: oklch(0.88 0.07 230);
+  --color-sky-300: oklch(0.78 0.1 230);
+  --color-sky-400: oklch(0.68 0.12 230);
+  --color-sky-500: oklch(0.58 0.13 230);
+  --color-sky-600: oklch(0.5 0.12 228);
+  --color-sky-700: oklch(0.42 0.1 225);
+  --color-sky-800: oklch(0.35 0.08 222);
+  --color-sky-900: oklch(0.28 0.06 220);
+
+  /* --- Leaf: 自然のグリーン --- */
+  --color-leaf-50: oklch(0.96 0.02 145);
+  --color-leaf-100: oklch(0.92 0.04 145);
+  --color-leaf-200: oklch(0.85 0.06 145);
+  --color-leaf-300: oklch(0.75 0.08 145);
+  --color-leaf-400: oklch(0.65 0.1 145);
+  --color-leaf-500: oklch(0.55 0.1 145);
+
+  /* --- Warm: CTA のオレンジ --- */
+  --color-warm-400: oklch(0.72 0.16 45);
+  --color-warm-500: oklch(0.65 0.18 40);
+  --color-warm-600: oklch(0.58 0.18 38);
+
+  /* --- Cloud: 白〜ライトグレー --- */
+  --color-cloud-50: oklch(0.995 0.003 240);
+  --color-cloud-100: oklch(0.97 0.005 240);
+  --color-cloud-200: oklch(0.94 0.008 240);
+  --color-cloud-300: oklch(0.9 0.01 240);
+
+  /* --- Ink: テキスト色 --- */
+  --color-ink-900: oklch(0.25 0.02 240);
+  --color-ink-700: oklch(0.4 0.02 240);
+  --color-ink-500: oklch(0.55 0.015 240);
+
+  /* --- Fonts --- */
+  --font-sans: 'Zen Maru Gothic', 'Noto Sans JP', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Zen Maru Gothic', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  line-height: 1.8;
+  font-weight: 500;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: oklch(0.58 0.13 230 / 0.25);
+  color: oklch(0.25 0.02 240);
+}
+
+/* --- Reveal animation --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Section label (mono uppercase) --- */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-sky-400);
+}
+
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: oklch(0.68 0.12 230 / 0.5);
+}
