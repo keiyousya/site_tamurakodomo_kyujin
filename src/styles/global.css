@@ -2,20 +2,20 @@
 
 /* ============================================
    KODOMO CLINIC THEME — DESIGN TOKENS
-   Sky blue × White × Warm orange (CTA)
+   水色 × White × ピンク (CTA)
    ============================================ */
 @theme {
-  /* --- Sky: やさしい水色 — 小児科の清潔感と安心感 --- */
-  --color-sky-50: oklch(0.97 0.02 230);
-  --color-sky-100: oklch(0.94 0.04 230);
-  --color-sky-200: oklch(0.88 0.07 230);
-  --color-sky-300: oklch(0.78 0.1 230);
-  --color-sky-400: oklch(0.68 0.12 230);
-  --color-sky-500: oklch(0.58 0.13 230);
-  --color-sky-600: oklch(0.5 0.12 228);
-  --color-sky-700: oklch(0.42 0.1 225);
-  --color-sky-800: oklch(0.35 0.08 222);
-  --color-sky-900: oklch(0.28 0.06 220);
+  /* --- Sky: プレーンな水色 — 小児科の清潔感と安心感 --- */
+  --color-sky-50: oklch(0.97 0.02 240);
+  --color-sky-100: oklch(0.94 0.04 240);
+  --color-sky-200: oklch(0.88 0.07 240);
+  --color-sky-300: oklch(0.78 0.10 240);
+  --color-sky-400: oklch(0.68 0.12 240);
+  --color-sky-500: oklch(0.58 0.13 240);
+  --color-sky-600: oklch(0.60 0.14 240);
+  --color-sky-700: oklch(0.54 0.13 240);
+  --color-sky-800: oklch(0.48 0.12 240);
+  --color-sky-900: oklch(0.42 0.11 240);
 
   /* --- Leaf: 自然のグリーン --- */
   --color-leaf-50: oklch(0.96 0.02 145);
@@ -25,10 +25,10 @@
   --color-leaf-400: oklch(0.65 0.1 145);
   --color-leaf-500: oklch(0.55 0.1 145);
 
-  /* --- Warm: CTA のオレンジ --- */
-  --color-warm-400: oklch(0.72 0.16 45);
-  --color-warm-500: oklch(0.65 0.18 40);
-  --color-warm-600: oklch(0.58 0.18 38);
+  /* --- Warm: やさしいピンク --- */
+  --color-warm-400: oklch(0.78 0.10 0);
+  --color-warm-500: oklch(0.72 0.12 0);
+  --color-warm-600: oklch(0.65 0.13 358);
 
   /* --- Cloud: 白〜ライトグレー --- */
   --color-cloud-50: oklch(0.995 0.003 240);
@@ -73,7 +73,7 @@ body {
 }
 
 ::selection {
-  background: oklch(0.58 0.13 230 / 0.25);
+  background: oklch(0.58 0.13 240 / 0.25);
   color: oklch(0.25 0.02 240);
 }
 
@@ -109,5 +109,5 @@ body {
   display: inline-block;
   width: 24px;
   height: 1px;
-  background: oklch(0.68 0.12 230 / 0.5);
+  background: oklch(0.68 0.12 240 / 0.5);
 }

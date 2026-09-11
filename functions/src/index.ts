@@ -6,7 +6,7 @@ const gmailAppPassword = defineSecret("gmail-app-password");
 
 const GMAIL_AUTH_USER = "tamurakeito@keiyousya.com";
 const MAIL_FROM = "tamurakodomo-kyujin@keiyousya.com";
-const MAIL_TO = "tamurakeito@keiyousya.com";
+const MAIL_TO = "tamurakeito@keiyousya.com, tamurakodomo@gmail.com";
 
 // インメモリレートリミット
 const rateLimitMap = new Map<string, number[]>();

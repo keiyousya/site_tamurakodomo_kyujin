@@ -1,7 +1,7 @@
 ---
 ---
 
-<form id="apply-form" class="mx-auto max-w-lg space-y-6">
+<form id="apply-form" class="space-y-6">
   <!-- ハニーポット -->
   <div class="hidden" aria-hidden="true">
     <input type="text" name="_hp" tabindex="-1" autocomplete="off" />
@@ -21,6 +21,34 @@
   </div>
 
   <div>
+    <label for="age" class="mb-1 block text-sm font-bold text-ink-900">年齢 <span class="text-warm-500">*</span></label>
+    <input
+      type="number"
+      id="age"
+      name="age"
+      required
+      min="18"
+      max="99"
+      class="w-full rounded-lg border border-sky-200 bg-white px-4 py-3 text-sm text-ink-900 outline-none transition-colors focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+      placeholder="30"
+    />
+  </div>
+
+  <div>
+    <label for="license" class="mb-1 block text-sm font-bold text-ink-900">保有資格 <span class="text-warm-500">*</span></label>
+    <select
+      id="license"
+      name="license"
+      required
+      class="w-full appearance-none rounded-lg border border-sky-200 bg-white px-4 py-3 pr-10 text-sm text-ink-900 outline-none transition-colors focus:border-sky-400 focus:ring-2 focus:ring-sky-200 bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23999%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%2F%3E%3C%2Fsvg%3E')] bg-[length:16px] bg-[position:right_12px_center] bg-no-repeat"
+    >
+      <option value="" disabled selected>選択してください</option>
+      <option value="正看護師">正看護師</option>
+      <option value="准看護師">准看護師</option>
+    </select>
+  </div>
+
+  <div>
     <label for="email" class="mb-1 block text-sm font-bold text-ink-900">メールアドレス <span class="text-warm-500">*</span></label>
     <input
       type="email"
@@ -34,11 +62,12 @@
   </div>
 
   <div>
-    <label for="phone" class="mb-1 block text-sm font-bold text-ink-900">電話番号</label>
+    <label for="phone" class="mb-1 block text-sm font-bold text-ink-900">電話番号 <span class="text-warm-500">*</span></label>
     <input
       type="tel"
       id="phone"
       name="phone"
+      required
       maxlength="20"
       class="w-full rounded-lg border border-sky-200 bg-white px-4 py-3 text-sm text-ink-900 outline-none transition-colors focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
       placeholder="090-1234-5678"
@@ -46,11 +75,10 @@
   </div>
 
   <div>
-    <label for="message" class="mb-1 block text-sm font-bold text-ink-900">メッセージ <span class="text-warm-500">*</span></label>
+    <label for="message" class="mb-1 block text-sm font-bold text-ink-900">メッセージ</label>
     <textarea
       id="message"
       name="message"
-      required
       maxlength="5000"
       rows="5"
       class="w-full rounded-lg border border-sky-200 bg-white px-4 py-3 text-sm text-ink-900 outline-none transition-colors focus:border-sky-400 focus:ring-2 focus:ring-sky-200 resize-y"
