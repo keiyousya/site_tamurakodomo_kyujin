@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '@/layouts/Layout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
@@ -6,6 +7,13 @@ import SectionHeading from '@/components/SectionHeading.astro';
 import FeatureCard from '@/components/FeatureCard.astro';
 import RequirementsTable from '@/components/RequirementsTable.astro';
 import ApplyForm from '@/components/ApplyForm.astro';
+
+import exteriorImg from '@/assets/images/exterior.jpg';
+import doctorImg from '@/assets/images/doctor.jpg';
+import treatmentImg from '@/assets/images/treatment.jpg';
+import waitingImg from '@/assets/images/waiting.jpg';
+import isolationImg from '@/assets/images/isolation.jpg';
+import signageImg from '@/assets/images/signage.jpg';
 
 const requirements = [
   { label: '募集職種', value: '看護師（正看護師・准看護師）' },
@@ -72,9 +80,13 @@ const requirements = [
   >
     <!-- 背景画像 -->
     <div class="absolute inset-0">
-      <img
-        src="/images/exterior.jpg"
+      <Image
+        src={exteriorImg}
         alt="たむらこどもクリニック外観"
+        widths={[768, 1280, 1920]}
+        sizes="100vw"
+        format="webp"
+        quality={80}
         class="h-full w-full object-cover"
       />
       <div class="absolute inset-0 bg-gradient-to-b from-sky-900/70 via-sky-900/55 to-sky-900/80"></div>
@@ -130,9 +142,12 @@ const requirements = [
     <div class="mx-auto max-w-4xl px-5">
       <SectionHeading label="message" title="院長メッセージ" />
       <div class="reveal flex flex-col items-center gap-8 md:flex-row md:items-start">
-        <img
-          src="/images/doctor.jpg"
+        <Image
+          src={doctorImg}
           alt="院長 田村一志"
+          width={256}
+          format="webp"
+          quality={80}
           class="h-64 w-64 shrink-0 rounded-2xl object-cover shadow-sm"
         />
         <div>
@@ -158,28 +173,28 @@ const requirements = [
       <SectionHeading label="gallery" title="院内の様子" />
       <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <div class="reveal group overflow-hidden rounded-2xl shadow-sm">
-          <img src="/images/treatment.jpg" alt="待合スペース" class="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+          <Image src={treatmentImg} alt="待合スペース" width={600} format="webp" quality={80} class="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
           <div class="bg-white px-4 py-3">
             <p class="text-sm font-bold text-ink-800">待合スペース</p>
             <p class="text-xs text-ink-500">空と雲をモチーフにした明るい待合室</p>
           </div>
         </div>
         <div class="reveal group overflow-hidden rounded-2xl shadow-sm" style="transition-delay:100ms">
-          <img src="/images/waiting.jpg" alt="プレイスペース" class="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+          <Image src={waitingImg} alt="プレイスペース" width={600} format="webp" quality={80} class="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
           <div class="bg-white px-4 py-3">
             <p class="text-sm font-bold text-ink-800">プレイスペース</p>
             <p class="text-xs text-ink-500">お子さまが安心して待てる遊び場</p>
           </div>
         </div>
         <div class="reveal group overflow-hidden rounded-2xl shadow-sm" style="transition-delay:200ms">
-          <img src="/images/isolation.jpg" alt="隔離診察室" class="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+          <Image src={isolationImg} alt="隔離診察室" width={600} format="webp" quality={80} class="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
           <div class="bg-white px-4 py-3">
             <p class="text-sm font-bold text-ink-800">隔離診察室</p>
             <p class="text-xs text-ink-500">感染対策に配慮した個別の診察室</p>
           </div>
         </div>
         <div class="reveal group overflow-hidden rounded-2xl shadow-sm sm:col-span-2 lg:col-span-3" style="transition-delay:300ms">
-          <img src="/images/signage.jpg" alt="看板" class="h-72 w-full object-contain bg-sky-100 transition-transform duration-300 group-hover:scale-105" />
+          <Image src={signageImg} alt="看板" width={1200} format="webp" quality={80} class="h-72 w-full object-contain bg-sky-100 transition-transform duration-300 group-hover:scale-105" />
           <div class="bg-white px-4 py-3">
             <p class="text-sm font-bold text-ink-800">看板</p>
             <p class="text-xs text-ink-500">カンガルーが目印の看板</p>
