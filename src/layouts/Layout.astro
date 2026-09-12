@@ -8,7 +8,7 @@ interface Props {
 
 const {
   title,
-  description = '群馬県前橋市のたむらこどもクリニックでは看護師を募集しています。小児科クリニックで子どもたちの笑顔に囲まれて働きませんか？日勤のみ・夜勤なし。ブランクOK。',
+  description = '群馬県前橋市の小児科・たむらこどもクリニックで看護師パート募集中。午後のみ（14:00〜18:30）・日勤のみ・夜勤なし。正看護師・准看護師歓迎。小児科未経験・ブランクOK。時給1,600円〜。車通勤可。',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -58,24 +58,29 @@ const base = import.meta.env.BASE_URL;
       gtag('config', 'AW-XXXXXXXXXX');
     </script> -->
 
-    <!-- 構造化データ -->
+    <!-- 構造化データ: JobPosting (Google for Jobs 対応) -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "JobPosting",
-      "title": "看護師（正看護師・准看護師）",
-      "description": "たむらこどもクリニックでの看護業務。診察補助、予防接種対応、保護者への説明など。日勤のみ・夜勤なし。小児科未経験・ブランクOK。",
+      "title": "看護師パート（正看護師・准看護師）",
+      "description": "<p>群馬県前橋市の小児科クリニックで看護師パートを募集しています。</p><h3>仕事内容</h3><ul><li>診察の補助（問診・検査・処置のサポート）</li><li>予防接種・健診の対応</li><li>保護者への説明・指導</li><li>院内の感染対策・環境整備</li></ul><h3>勤務条件</h3><ul><li>勤務時間：14:00〜18:30</li><li>勤務日：月・火・水・金のうち週2〜4日</li><li>日勤のみ・夜勤なし</li><li>木曜・土曜・日曜・祝日休み</li><li>夏季休暇・年末年始休暇あり</li></ul><h3>応募資格</h3><p>看護師免許をお持ちの方（正看護師・准看護師）。小児科経験不問・ブランクのある方も歓迎します。</p><h3>待遇</h3><ul><li>時給1,600円〜（経験・能力を考慮）</li><li>交通費支給（規定による）</li><li>有給休暇あり</li><li>駐車場完備（車通勤OK）</li><li>制服貸与</li></ul>",
       "datePosted": "2026-09-10",
-      "employmentType": ["FULL_TIME", "PART_TIME"],
+      "validThrough": "2027-03-31T23:59:59+09:00",
+      "employmentType": "PART_TIME",
+      "workHours": "14:00〜18:30（月・火・水・金のうち週2〜4日）",
+      "jobBenefits": "交通費支給、有給休暇あり、駐車場完備（車通勤OK）、制服貸与",
+      "directApply": true,
       "hiringOrganization": {
         "@type": "MedicalClinic",
         "name": "たむらこどもクリニック",
-        "sameAs": "https://keiyousya.github.io/site_tamurakodomo_kyujin",
+        "sameAs": "https://tamurakodomo-kyujin.web.app",
+        "logo": "https://tamurakodomo-kyujin.web.app/favicon.svg",
         "address": {
           "@type": "PostalAddress",
-          "postalCode": "371-0048",
+          "postalCode": "371-0013",
           "addressRegion": "群馬県",
           "addressLocality": "前橋市",
-          "streetAddress": "田口町",
+          "streetAddress": "西片貝町3丁目123-5",
           "addressCountry": "JP"
         }
       },
@@ -83,14 +88,23 @@ const base = import.meta.env.BASE_URL;
         "@type": "Place",
         "address": {
           "@type": "PostalAddress",
-          "postalCode": "371-0048",
+          "postalCode": "371-0013",
           "addressRegion": "群馬県",
           "addressLocality": "前橋市",
-          "streetAddress": "田口町",
+          "streetAddress": "西片貝町3丁目123-5",
           "addressCountry": "JP"
         }
       },
-      "qualifications": "看護師免許（正看護師または准看護師）",
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "JPY",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 1600,
+          "unitText": "HOUR"
+        }
+      },
+      "qualifications": "看護師免許（正看護師または准看護師）。小児科経験不問・ブランクOK。",
       "industry": "医療",
       "occupationalCategory": "29-1141.00"
     })} />
