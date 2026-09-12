@@ -54,10 +54,10 @@ export const sendApplyEmail = onRequest(
     }
 
     // バリデーション
-    if (!name || !email || !message) {
+    if (!name || !email) {
       res
         .status(400)
-        .json({ error: "お名前・メールアドレス・メッセージを入力してください。" });
+        .json({ error: "お名前・メールアドレスを入力してください。" });
       return;
     }
 
@@ -84,7 +84,7 @@ export const sendApplyEmail = onRequest(
       return;
     }
 
-    if (typeof message !== "string" || message.length > 5000) {
+    if (message && (typeof message !== "string" || message.length > 5000)) {
       res
         .status(400)
         .json({ error: "メッセージは5000文字以内で入力してください。" });
@@ -111,7 +111,7 @@ export const sendApplyEmail = onRequest(
           `電話番号: ${phone || "未入力"}`,
           "",
           "メッセージ:",
-          message,
+          message || "未入力",
         ].join("\n"),
       });
 
