@@ -45,7 +45,7 @@ export const sendApplyEmail = onRequest(
     timestamps.push(now);
     rateLimitMap.set(ip, timestamps);
 
-    const { name, email, phone, message, _hp } = req.body;
+    const { name, age, license, email, phone, message, _hp } = req.body;
 
     // ハニーポット
     if (_hp) {
@@ -107,6 +107,8 @@ export const sendApplyEmail = onRequest(
         subject: `【看護師応募】${name}様より`,
         text: [
           `お名前: ${name}`,
+          `年齢: ${age || "未入力"}`,
+          `保有資格: ${license || "未入力"}`,
           `メールアドレス: ${email}`,
           `電話番号: ${phone || "未入力"}`,
           "",
