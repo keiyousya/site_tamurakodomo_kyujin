@@ -39,61 +39,17 @@ src/
 
 ## Google Ads 管理
 
-### 概要
-Google Ads APIをCLIから操作してリスティング広告を管理する。
-Claude AIエージェントが広告の作成・更新・レポート取得を支援する。
+`ads/` の `gads` CLI（Python・勾当台夕方内科クリニックの `ads/` と同じ作り）で操作する。
+セットアップと全コマンドは `ads/README.md` を参照。
 
-### セットアップ手順
-
-1. **Google Ads API アクセス設定**
-   ```bash
-   # Google Ads API の開発者トークンを取得
-   # https://developers.google.com/google-ads/api/docs/get-started/dev-token
-
-   # google-ads.yaml に認証情報を設定
-   cat > google-ads.yaml << 'EOF'
-   developer_token: "YOUR_DEVELOPER_TOKEN"
-   client_id: "YOUR_CLIENT_ID"
-   client_secret: "YOUR_CLIENT_SECRET"
-   refresh_token: "YOUR_REFRESH_TOKEN"
-   login_customer_id: "YOUR_MANAGER_ACCOUNT_ID"
-   EOF
-   ```
-
-2. **Python クライアントライブラリのインストール**
-   ```bash
-   pip install google-ads
-   ```
-
-3. **Google Ads アカウントの作成**
-   - https://ads.google.com でアカウントを作成
-   - API アクセスを有効化
-
-### Claude AI エージェントによる広告管理
-
-以下のタスクをClaude Codeに依頼できる：
-
-#### キャンペーン管理
-- `ads/` ディレクトリ内のスクリプトでキャンペーンを管理
-- キャンペーン作成・予算変更・ステータス変更
-
-#### 広告文の管理
-- 広告文のA/Bテスト案作成
-- レスポンシブ検索広告のアセット（見出し・説明文）管理
-
-#### キーワード管理
-- ターゲットキーワードの提案・追加・除外
-- 推奨キーワード例：
-  - `看護師 求人 前橋`
-  - `看護師 募集 群馬`
-  - `小児科 看護師 求人`
-  - `准看護師 パート 前橋市`
-  - `看護師 転職 群馬県`
-  - `クリニック 看護師 日勤のみ`
-
-#### レポート
-- クリック数・表示回数・コンバージョンのレポート取得
-- パフォーマンス分析と改善提案
-
-### 広告設定ファイル（ads/config.json）
-広告の設定をJSON形式で管理し、スクリプトで Google Ads API に反映する。
+- 実行は `ads/.venv/bin/gads`。認証情報は `ads/.env`（コミットしない）
+- 広告アカウントは `853-224-9376`（MCC 配下にリンクされていない単独アカウント。login-customer-id も同じID）。
+  開発者トークン・OAuth クライアントは web-production と共通で、
+  `ads/scripts/pull_secrets.sh` が Secret Manager（keiyousya-sites-prod）から `.env` を作る
+- `ads/config.json` がキャンペーン設定。初回構築は `gads setup`（PAUSED で一括作成）
+- 作成後の変更は個別コマンドで行い、`config.json` も合わせて更新して現状の控えにする
+- 広告文は**サイトの募集要項と一致させる**（パート・14:00〜18:30・週2〜4日・時給1,600円〜）。
+  サイトにない条件（正社員・社会保険など）を書かない
+- 見出しは全角15字・説明文は全角45字まで（Google は全角を2と数える）
+- 変更系コマンドは確認プロンプトが出る。お金が動く操作（ENABLED・予算変更）は実行前にユーザーに確認する
+- レポート確認は `--csv` を付ける（表形式は列が省略される）

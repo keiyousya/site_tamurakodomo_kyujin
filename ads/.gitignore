@@ -1,0 +1,16 @@
+# 認証情報（絶対にコミットしない）
+.env
+google-ads.yaml
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# 出力物
+*.csv
+out/
