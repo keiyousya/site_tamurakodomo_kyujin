@@ -102,6 +102,8 @@
 </form>
 
 <script>
+  import { CONVERSION_APPLY } from '@/config/ads';
+
   const form = document.getElementById('apply-form') as HTMLFormElement;
   const btnText = document.getElementById('btn-text')!;
   const btnLoading = document.getElementById('btn-loading')!;
@@ -132,6 +134,7 @@
       if (res.ok && result.success) {
         successMsg.classList.remove('hidden');
         form.reset();
+        window.gtag?.('event', 'conversion', { send_to: CONVERSION_APPLY });
       } else {
         errorMsg.textContent = result.error || '送信に失敗しました。';
         errorMsg.classList.remove('hidden');

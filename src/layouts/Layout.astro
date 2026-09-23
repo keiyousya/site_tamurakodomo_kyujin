@@ -1,5 +1,6 @@
 ---
 import '@/styles/global.css';
+import { CONVERSION_TEL, GOOGLE_ADS_ID } from '@/config/ads';
 
 interface Props {
   title: string;
@@ -49,14 +50,23 @@ const base = import.meta.env.BASE_URL;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
-    <!-- Google Ads コンバージョントラッキング（IDを設定してください） -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXXX"></script>
-    <script>
+    <!-- Google 広告: gtag.js と電話タップのコンバージョン計測（ID は src/config/ads.ts） -->
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}></script>
+    <script is:inline define:vars={{ adsId: GOOGLE_ADS_ID, telConversion: CONVERSION_TEL }}>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      // define:vars で関数スコープに包まれるため、gtag は window に生やす
+      window.gtag = function () {
+        window.dataLayer.push(arguments);
+      };
       gtag('js', new Date());
-      gtag('config', 'AW-XXXXXXXXXX');
-    </script> -->
+      gtag('config', adsId);
+
+      // ページ内のすべての tel: リンク（本文・フッター）をまとめて拾う
+      document.addEventListener('click', function (e) {
+        var link = e.target instanceof Element && e.target.closest('a[href^="tel:"]');
+        if (link) gtag('event', 'conversion', { send_to: telConversion });
+      });
+    </script>
 
     <!-- 構造化データ: JobPosting (Google for Jobs 対応) -->
     <script type="application/ld+json" set:html={JSON.stringify({
