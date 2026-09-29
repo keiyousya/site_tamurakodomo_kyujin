@@ -69,6 +69,58 @@ def set_budget(
     console.print("[green]✓ 予算を変更しました。[/green]")
 
 
+@budget.command("bid")
+@click.option("--ad-group-id", required=True, help="対象広告グループID。")
+@click.option(
+    "--amount",
+    required=True,
+    type=float,
+    help="新しい上限CPC（円）。micros へ自動換算する。",
+)
+@click.option("--customer-id", default=None, help="操作対象アカウントID（未指定時は.env）。")
+@click.option("--yes", is_flag=True, help="確認をスキップする。")
+def set_bid(
+    ad_group_id: str, amount: float, customer_id: str | None, yes: bool
+) -> None:
+    """広告グループの上限CPC（入札単価）を変更する。"""
+    client = load_client()
+    cid = resolve_customer_id(customer_id)
+
+    # 現在の入札単価を取得
+    ga_service = client.get_service("GoogleAdsService")
+    query = f"""
+        SELECT ad_group.name, ad_group.cpc_bid_micros
+        FROM ad_group
+        WHERE ad_group.id = {ad_group_id}
+    """
+    result = list(ga_service.search(customer_id=cid, query=query))
+    if not result:
+        raise click.ClickException(f"広告グループ {ad_group_id} が見つかりません。")
+
+    row = result[0]
+    current = row.ad_group.cpc_bid_micros / 1_000_000
+    new_micros = int(round(amount * 1_000_000))
+
+    console.print(
+        f"[bold]{row.ad_group.name}[/bold] の上限CPC: "
+        f"{current:,.0f}円 → [green]{amount:,.0f}円[/green]"
+    )
+    if not yes:
+        click.confirm("変更しますか？", abort=True)
+
+    ad_group_service = client.get_service("AdGroupService")
+    operation = client.get_type("AdGroupOperation")
+    update = operation.update
+    update.resource_name = ad_group_service.ad_group_path(cid, ad_group_id)
+    update.cpc_bid_micros = new_micros
+    client.copy_from(
+        operation.update_mask,
+        protobuf_helpers.field_mask(None, update._pb),
+    )
+    ad_group_service.mutate_ad_groups(customer_id=cid, operations=[operation])
+    console.print("[green]✓ 入札単価を変更しました。[/green]")
+
+
 @budget.command("status")
 @click.option("--campaign-id", required=True, help="対象キャンペーンID。")
 @click.option(
